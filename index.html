@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeJNZ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 20px auto;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Profile Section */
+        .profile {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #6a11cb;
+            margin: 0 auto 15px;
+            display: block;
+            background-color: #f0f0f0;
+            padding: 5px;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d2d2d;
+            margin-bottom: 5px;
+        }
+
+        .bio {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 80%;
+            margin: 0 auto 15px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #6a11cb;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Links Section */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 16px;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: #333;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .link-item:hover {
+            transform: translateY(-5px);
+            border-color: #6a11cb;
+            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.15);
+        }
+
+        .link-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+            color: white;
+        }
+
+        .link-text {
+            flex: 1;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .link-description {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .link-arrow {
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        /* Social Icons */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            color: #6a11cb;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            background: #6a11cb;
+            color: white;
+        }
+
+        /* Call */
+        .call {
+            text-align: justify;
+            text-indent: 2em;
+            margin-bottom: 10px;
+        }
+
+        .call-block {
+            text-align: center;
+            font-size: 110%;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+
+            .bio {
+                font-size: 15px;
+                max-width: 100%;
+            }
+
+            .link-item {
+                padding: 16px 18px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                padding: 20px 15px;
+            }
+
+            .stats {
+                gap: 15px;
+            }
+
+            .stat-value {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Profile Section -->
+            <div class="profile">
+                <img src="images/freejnz.png" alt="Profile Picture" class="avatar">
+                <h1 class="name">FreeJNZ</h1>
+                <p class="bio">Support the members of K-pop group <b>NewJeans</b> by streaming the songs that they have contributed to as writers.</p>
+
+            <!-- Links Section -->
+            <div class="links">
+                <a href="https://www.youtube.com/watch?v=js1CtxSY38I&list=PLe8kJNaOjOeCOGYj-qcl2XBnAR0miTjzM&pp=gAQB" class="link-item" target="_blank">
+                    <div class="link-icon" style="background-color: #FF0000;">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">YouTube Playlist</div>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+
+                <a href="https://open.spotify.com/playlist/0pt5HdPkEM76Gd3FS5RpYT?si=eMi-NcL-TsWgbEE-Cc4WZw" class="link-item" target="_blank">
+                    <div class="link-icon" style="background-color: #333;">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">Spotify Playlist</div>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+
+                <a href="https://music.apple.com/us/playlist/freejnz/pl.u-kv9lbZJT72G78j" class="link-item" target="_blank">
+                    <div class="link-icon" style="background-color: #0077B5;">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">Apple Music</div>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </a>
+            </div>
+
+            <p class="call"><b>NewJeans</b> has been in a long embroiled dispute with their label, <b>ADOR</b> and it's parent company, <b>Hybe</b>, demanding for their exclusive contracts be terminated due to a breach of trust. After multiple court hearings the court has determined that NewJeans must remain with ADOR. After the group decided they would rather come back together as NewJeans than be seperated, ADOR came to the decision to terminate member <b>Danielle Marsh</b>'s contract due what ADOR has deemed a breach of trust, as well as sue her in part of a 30 million dollar lawsuit</p>
+            <p class="call">Former ADOR CEO <b>Min Hee-jin</b>, who was ousted by Hybe and was sued along with Marsh, did the artists right by keeping the writers' and production rights with their creators. This includes when the members have written lyrics. So with every stream of these songs, it is very likely that the members who helped write the songs will be paid writer's royalties. This is especially important for Danielle who is no longer a contracted artist, so she will likely not be getting paid for her work through anything but these royalties. She is the member who has contributed to the most songs and deserves fair compensation for the success of her work.</p>
+            <p class="call">We demand that <b>ADOR</b> terminate the contracts of all 5 members of <b>NewJeans</b> immediately! And cease with any litigation with said members. The trust between label and the artists has completely erroded and we can see no possiblity for NewJeans to continue under ADOR in good faith.</p>
+            <p class="call">We call for all <b>Bunnies</b>, and everyone who believes in artists' rights to join us in boycotting any other media, merchendise, or anything else produced by a Hybe property, except for what has been described here. We believe Hybe is controlling any decisions made by ADOR since the ousting Min. What Hybe is doing with its treatment of NewJeans members is a dangerous presidence for all artists. The members of NewJeans were following what they believed was right. Hybe is a multi-billion dollar company, spending millions on lawyers and campaigns against Min and the group's members. Their goal was/is clearly to take control of NewJeans, who has seen global success, and punish those who dared stand against them. Their termination of NewJeans member Danielle's contract displays not only how they are willing to crush one young woman's career and dreams, but also show they cannot be trusted in doing what is in the best interest of the group and its members. This is not just about who was in the right by existing laws, but about perserving artists' rights and who has control over what they can do and say. The members demanded their contracts be terminated, but ADOR/Hybe never gave them a real choice. It has become clear that Hybe has all the control. While we would like to see all the artists under Hybe that we love and hold dear succeed, we cannot let this injustice stand.</p>
+            <p class="call-block">NewJeans OT5 FOREVER</p>
+            <p class="bio">If you'd like to include another service or other ways to support the members feel free to contact me, so it can be added it here.</p>
+
+            <!-- Social Icons -->
+            <div class="social-links">
+                <a href="https://instagram.com/freejnz" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/StreakInTheSky/freejnz/discussions" class="social-icon" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div class="footer">
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            const linkItems = document.querySelectorAll('.link-item');
+
+            // Add click animation to links
+            linkItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(106, 17, 203, 0.3);
+                        transform: scale(0);
+                        animation: ripple-animation 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+
+                    // Remove ripple element after animation
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add a simple theme toggle (light/dark mode)
+            const card = document.querySelector('.card');
+            const toggleBtn = document.createElement('button');
+            toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            toggleBtn.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: none;
+                background: #6a11cb;
+                color: white;
+                cursor: pointer;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+                z-index: 10;
+            `;
+
+            document.querySelector('.container').appendChild(toggleBtn);
+
+            let isDark = false;
+            toggleBtn.addEventListener('click', function() {
+                isDark = !isDark;
+
+                if(isDark) {
+                    card.style.backgroundColor = '#1a1a2e';
+                    card.style.color = '#f0f0f0';
+                    document.querySelector('.name').style.color = '#f0f0f0';
+                    document.querySelectorAll('.link-item').forEach(item => {
+                        item.style.backgroundColor = '#16213e';
+                        item.style.color = '#f0f0f0';
+                    });
+                    document.querySelectorAll('.link-description').forEach(desc => {
+                        desc.style.color = '#b0b0b0';
+                    });
+                    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                    toggleBtn.style.background = '#f0f0f0';
+                    toggleBtn.style.color = '#1a1a2e';
+                } else {
+                    card.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                    card.style.color = '#333';
+                    document.querySelector('.name').style.color = '#2d2d2d';
+                    document.querySelectorAll('.link-item').forEach(item => {
+                        item.style.backgroundColor = 'white';
+                        item.style.color = '#333';
+                    });
+                    document.querySelectorAll('.link-description').forEach(desc => {
+                        desc.style.color = '#777';
+                    });
+                    toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                    toggleBtn.style.background = '#6a11cb';
+                    toggleBtn.style.color = 'white';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
